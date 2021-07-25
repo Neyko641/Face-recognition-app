@@ -1,9 +1,9 @@
 .Tilt {
     background: rgb(2,0,36);
-    background: -moz-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(77,142,117,1) 38%, rgba(73,145,123,1) 67%, rgba(0,212,255,1) 100%);
-    background: -webkit-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(77,142,117,1) 38%, rgba(73,145,123,1) 67%, rgba(0,212,255,1) 100%);
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(77,142,117,1) 38%, rgba(73,145,123,1) 67%, rgba(0,212,255,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00d4ff",GradientType=1);
+    background: -moz-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(34,32,83,1) 21%, rgba(28,27,84,1) 38%, rgba(33,30,79,1) 60%);
+    background: -webkit-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(34,32,83,1) 21%, rgba(28,27,84,1) 38%, rgba(33,30,79,1) 60%);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(34,32,83,1) 21%, rgba(28,27,84,1) 38%, rgba(33,30,79,1) 60%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#211e4f",GradientType=1);
 }
 .img {
     max-width: 100%;
