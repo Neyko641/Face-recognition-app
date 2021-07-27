@@ -7,6 +7,7 @@ import Rank  from './components/Rank/Rank';
 import Particles from 'react-particles-js';
 import React, { Component } from 'react';
 import Clarifai from 'clarifai';
+import SignIn from './components/SignIn/SignIn';
 const app = new Clarifai.App({
   apiKey: '29ced2b0b77b434e9970592b24af755f'
 })
@@ -125,26 +126,50 @@ class App extends Component {
     super();
     this.state = {
       input: ``,
-      imageUrl: ``
+      imageUrl: ``,
+      box: {},
+      route:'SignIn'
     }
   }
+
+  calcFaceLocation = (data) => {
+    const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
+    const image = document.getElementById('inputImg');
+    const width = Number(image.width);
+    const height = Number(image.height);
+    return {
+      leftCol: clarifaiFace.left_col * width,
+      topRow: clarifaiFace.top_row * height,
+      rightCol: width - (clarifaiFace.right_col * width),
+      bottomRow: height - (clarifaiFace.bottom_row * height)
+    }
+  }
+
+  displayFaceBox = (box) => {
+    this.setState({box: box});
+    console.log(box);
+  }
+
    onChange = (event) => {
      this.setState({input: event.target.value});
   }
    onBtnSubmit = () => {
     this.setState({imageUrl: this.state.input});
     app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
-    .then(function (response) {
-        console.log(response);
-      },
-      function (error) {
-        console.log(error);
-      });
+    .then(response => this.displayFaceBox(this.calcFaceLocation(response)))
+    .catch(err => console.log(err));
   }
+    onRouteChange = (route) => {
+      this.setState({route: route});
+    }
+
   render() {
   return (
     <div className="App">
-      <Navigation/>
+      <Navigation onRouteChange={this.onRouteChange}/>
+      { this.state.route === 'SignIn' 
+      ? <SignIn onRouteChange = {this.onRouteChange} /> 
+      : <div>
       <Logo/>
       <ImageLinkForm 
       onChange={this.onChange}                
@@ -152,8 +177,10 @@ class App extends Component {
       />
       <Rank/>
       <Particles params={paramsOptions} className='particles'/>
-      <FaceRecognition imageUrl = {this.state.imageUrl}/>
-    </div>
+      <FaceRecognition box={this.state.box} imageUrl = {this.state.imageUrl}/>
+      </div>
+  }
+    </div> 
   );
   }
 }
