@@ -161,20 +161,12 @@ class App extends Component {
     .catch(err => console.log(err));
   }
     onRouteChange = (route) => {
-      /*switch(route) {
+      switch(route) {
         case 'SignOut': this.setState({isSignedIn: false});
         break;
         case 'home':  this.setState({isSignedIn: true});
         break;
-        default: 
-      } 
-      Switch case breaks the login for some weird reason.
-      */
-      if(route === 'SignOut') {
-        this.setState({isSignedIn: false});
-      } else if (route === 'home') {
-        this.setState({isSignedIn: true});
-      }
+        default: break;} 
       this.setState({route: route});
     }
 
